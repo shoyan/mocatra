@@ -16,4 +16,17 @@ describe Mocatra do
     expect(last_response.status).to eq 404
     expect(last_response.body).to eq({"version"=>"1", "result"=>"not found"}.to_s)
   end
+
+  describe ".record_path" do
+    it "returns the record_path" do
+      expect(Mocatra::App.record_path).to eq File.expand_path("../../records", __FILE__)
+    end
+  end
+
+  describe ".record_path=" do
+    it "sets the record_path" do
+      Mocatra::App.record_path = "./mocs"
+      expect(Mocatra::App.record_path).to eq "./mocs"
+    end
+  end
 end

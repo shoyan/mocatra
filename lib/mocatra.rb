@@ -6,6 +6,14 @@ module Mocatra
   class App < Sinatra::Base
     set :bind, '0.0.0.0'
 
+    def self.record_path
+      @record_path || File.expand_path("../../records", __FILE__)
+    end
+
+    def self.record_path=(path)
+      @record_path = path
+    end
+
     get '*' do
       my_song(request)
     end
