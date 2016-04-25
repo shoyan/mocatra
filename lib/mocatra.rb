@@ -1,6 +1,7 @@
 require "mocatra/version"
 require 'sinatra/base'
 require 'mocatra/record'
+require 'json'
 
 module Mocatra
   class App < Sinatra::Application
@@ -35,13 +36,20 @@ module Mocatra
     end
 
     def my_song(request)
+      if request.content_type =~ /json/
+        json = JSON.parse request.body.read
+        request.path_info = json["method"]
+      end
+
+      p path: request.path_info, parameters: json || request.body.read
+
       if Record.exist?(request.path_info)
         record = Record.sing(request.path_info)
         status record['status']
-        record['body'].to_s
+        record['body'].to_json
       else
         status 404
-        {"version"=>"1", "result"=>"not found"}.to_s
+        {"version"=>"1", "result"=>"not found"}.to_json
       end
     end
   end

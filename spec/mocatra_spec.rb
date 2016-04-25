@@ -8,13 +8,22 @@ describe Mocatra do
   it "returns ok" do
     get '/'
     expect(last_response).to be_ok
-    expect(last_response.body).to eq({"version"=>"1", "result"=>"OK"}.to_s)
+    expect(last_response.body).to eq({"version"=>"1", "result"=>"OK"}.to_json)
   end
 
   it "returns ok" do
     get '/user'
     expect(last_response.status).to eq 404
-    expect(last_response.body).to eq({"version"=>"1", "result"=>"not found"}.to_s)
+    expect(last_response.body).to eq({"version"=>"1", "result"=>"not found"}.to_json)
+  end
+
+  context "adds content type to header" do
+    it "returns ok" do
+      header "CONTENT_TYPE", "application/json"
+      post('/', "{\"version\":1.1,\"method\":\"index\",\"params\":{\"account\":\"hoge\"}}")
+      expect(last_response).to be_ok
+      expect(last_response.body).to eq({"version"=>"1", "result"=>"OK"}.to_json)
+    end
   end
 
   describe ".record_path" do
