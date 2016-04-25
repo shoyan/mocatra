@@ -3,7 +3,7 @@ require 'sinatra/base'
 require 'mocatra/record'
 
 module Mocatra
-  class App < Sinatra::Base
+  class App < Sinatra::Application
     set :bind, '0.0.0.0'
 
     def self.record_path
