@@ -1,8 +1,6 @@
 # Mocatra
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mocatra`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Mocatra is mock server with sinatra.  
+URL and Return value, response code can be set in the yaml file.
 
 ## Installation
 
@@ -22,7 +20,82 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, create file and records directory.
+
+```
+$ touch app.rb
+$ mkdir records
+```
+
+Edit app.rb as follows:
+
+```ruby
+require 'mocatra'
+Mocatra::App.record_path = './records/'
+Mocatra::App.run!
+```
+
+Create records/index.yml.
+
+```yml
+---
+status: 200
+body:
+  version: '1'
+  result: OK
+```
+
+Server start as follows:
+
+```
+$ ruby app.rb
+== Sinatra (v1.4.7) has taken the stage on 4567 for development with backup from Thin
+Thin web server (v1.6.4 codename Gob Bluth)
+Maximum connections set to 1024
+Listening on 0.0.0.0:4567, CTRL+C to stop
+```
+
+Exec API as follows:
+
+```
+$ curl http://localhost:4567 -i 
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Content-Length: 29
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Connection: keep-alive
+Server: thin
+
+{"version":"1","result":"OK"}
+```
+
+The content of index.yml is returned.
+
+### Specify URL and response
+
+Status code and body is required.
+You can your free settings for values.
+for example.
+
+```
+---
+status: 200
+body:
+  version: '1'
+  result: OK
+```
+
+records/index.yml will correspond to the following URL.
+
+```
+http://localhost:4567 or curl http://localhost:4567/index
+```
+
+records corresponding to `http://localhost:4567/user` is `records/user.yml`,
+and `http://localhost:4567/user/` is `records/user/index.yml`.
+
 
 ## Development
 
@@ -32,7 +105,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mocatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/shoyan/mocatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
