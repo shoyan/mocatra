@@ -11,13 +11,13 @@ describe Mocatra do
     expect(last_response.body).to eq({"version"=>"1", "result"=>"OK"}.to_json)
   end
 
-  it "returns ok" do
+  it "returns 404 not found" do
     get '/user'
     expect(last_response.status).to eq 404
     expect(last_response.body).to eq({"version"=>"1", "result"=>"not found"}.to_json)
   end
 
-  context "adds content type to header" do
+  context "when content type is application/json" do
     it "returns ok" do
       header "CONTENT_TYPE", "application/json"
       post('/', "{\"version\":1.1,\"method\":\"index\",\"params\":{\"account\":\"hoge\"}}")

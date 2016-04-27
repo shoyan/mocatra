@@ -49,8 +49,11 @@ module Mocatra
         record['body'].to_json
       else
         status 404
-        {"version"=>"1", "result"=>"not found"}.to_json
       end
+    end
+
+    not_found do
+      {"version"=>"1", "result"=>"not found"}.to_json
     end
   end
 end
