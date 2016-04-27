@@ -41,7 +41,7 @@ module Mocatra
         request.path_info = json["method"]
       end
 
-      p path: request.path_info, parameters: json || request.body.read
+      logger.info path: request.path_info, parameters: json || request.body.read
 
       if Record.exist?(request.path_info)
         record = Record.sing(request.path_info)
