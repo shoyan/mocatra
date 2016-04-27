@@ -1,4 +1,7 @@
 # Mocatra
+
+[![Build Status](https://travis-ci.org/shoyan/mocatra.svg?branch=master)](https://travis-ci.org/shoyan/mocatra)
+
 Mocatra is mock server with sinatra.  
 URL and Return value, response code can be set in the yaml file.
 
