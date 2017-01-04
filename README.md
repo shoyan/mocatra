@@ -2,8 +2,7 @@
 
 [![Build Status](https://travis-ci.org/shoyan/mocatra.svg?branch=master)](https://travis-ci.org/shoyan/mocatra)
 
-Mocatra is mock server with sinatra.  
-URL and Return value, response code can be set in the yaml file.
+Mocatra is mock server with sinatra. Returns set in the yaml file.
 
 ## Installation
 
@@ -79,7 +78,6 @@ The content of index.yml is returned.
 ### Specify URL and response
 
 Status code and body is required.
-You can your free settings for values.
 for example.
 
 ```
@@ -97,7 +95,7 @@ http://localhost:4567 or curl http://localhost:4567/index
 ```
 
 records corresponding to `http://localhost:4567/user` is `records/user.yml`,
-and `http://localhost:4567/user/` is `records/user/index.yml`.
+or `http://localhost:4567/user/` is `records/user/index.yml`.
 
 
 ## Development
