@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/shoyan/mocatra.svg?branch=master)](https://travis-ci.org/shoyan/mocatra)
 
-Mocatra is mock server with sinatra. Returns set in the yaml file.
+Mocatra is mock server with sinatra. Returns set in the response file.
 
 ## Installation
 
@@ -75,10 +75,11 @@ Server: thin
 
 The content of index.yml is returned.
 
-### Specify URL and response
+### Define response
 
-Status code and body is required.
-for example.
+Creates response file in the record_path directory.
+Response file is required status code and body.
+For example.
 
 ```
 ---
@@ -91,12 +92,11 @@ body:
 records/index.yml will correspond to the following URL.
 
 ```
-http://localhost:4567 or curl http://localhost:4567/index
+http://localhost:4567
 ```
 
-records corresponding to `http://localhost:4567/user` is `records/user.yml`,
-or `http://localhost:4567/user/` is `records/user/index.yml`.
-
+* `http://localhost:4567/user` correspond `records/user.yml`.
+* `http://localhost:4567/user/` correspond `records/user/index.yml`.
 
 ## Development
 
